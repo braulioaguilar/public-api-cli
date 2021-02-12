@@ -29,7 +29,7 @@ func getQuery(filter *string) (qs string) {
 
 // Run func
 func Run() (interface{}, error) {
-	if categoriesSubComand.Parsed() {
+	if categoriesSubCommand.Parsed() {
 		if err := httpClient.GetData(fmt.Sprintf("%v/categories", URL_PREFIX), &list); err != nil {
 			return nil, err
 		}
@@ -37,7 +37,7 @@ func Run() (interface{}, error) {
 		return list, nil
 	}
 
-	if entriesSubComand.Parsed() {
+	if entriesSubCommand.Parsed() {
 		if len(*entryFilter) > 0 {
 			query = getQuery(entryFilter)
 		}
@@ -47,7 +47,7 @@ func Run() (interface{}, error) {
 		}
 	}
 
-	if randomSubComand.Parsed() {
+	if randomSubCommand.Parsed() {
 		if len(*randomFilter) > 0 {
 			query = getQuery(randomFilter)
 		}

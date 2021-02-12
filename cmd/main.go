@@ -10,22 +10,22 @@ import (
 )
 
 var (
-	entriesSubComand    *flag.FlagSet
-	randomSubComand     *flag.FlagSet
-	categoriesSubComand *flag.FlagSet
-	entryFilter         *string
-	randomFilter        *string
-	httpClient          *http.Request
+	entriesSubCommand    *flag.FlagSet
+	randomSubCommand     *flag.FlagSet
+	categoriesSubCommand *flag.FlagSet
+	entryFilter          *string
+	randomFilter         *string
+	httpClient           *http.Request
 )
 
 func main() {
 	// Create subcomand
-	entriesSubComand = flag.NewFlagSet("entries", flag.ExitOnError)
-	randomSubComand = flag.NewFlagSet("random", flag.ExitOnError)
-	categoriesSubComand = flag.NewFlagSet("categories", flag.ExitOnError)
+	entriesSubCommand = flag.NewFlagSet("entries", flag.ExitOnError)
+	randomSubCommand = flag.NewFlagSet("random", flag.ExitOnError)
+	categoriesSubCommand = flag.NewFlagSet("categories", flag.ExitOnError)
 
-	entryFilter = entriesSubComand.String("filter", "", "String query filters")
-	randomFilter = randomSubComand.String("filter", "", "String query filters")
+	entryFilter = entriesSubCommand.String("filter", "", "String query filters")
+	randomFilter = randomSubCommand.String("filter", "", "String query filters")
 
 	flag.Parse()
 	if len(os.Args) < 2 {
@@ -34,17 +34,17 @@ func main() {
 
 	switch os.Args[1] {
 	case "categories":
-		categoriesSubComand.Parse(os.Args[2:])
+		categoriesSubCommand.Parse(os.Args[2:])
 	case "entries":
-		entriesSubComand.Parse(os.Args[2:])
+		entriesSubCommand.Parse(os.Args[2:])
 	case "random":
-		randomSubComand.Parse(os.Args[2:])
+		randomSubCommand.Parse(os.Args[2:])
 	default:
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
 
-	// Config cliet http
+	// Config client http
 	httpClient = http.NewClient()
 
 	data, err := Run()
