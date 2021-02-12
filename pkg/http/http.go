@@ -8,13 +8,13 @@ import (
 )
 
 // Request struct
-type request struct {
+type Request struct {
 	Client *http.Client
 }
 
 // NewClient func
-func NewClient() *request {
-	return &request{
+func NewClient() *Request {
+	return &Request{
 		Client: &http.Client{
 			Timeout: 3 * time.Second,
 		},
@@ -22,7 +22,7 @@ func NewClient() *request {
 }
 
 // GetData func
-func (r request) GetData(url string, data interface{}) error {
+func (r Request) GetData(url string, data interface{}) error {
 	resp, err := http.Get(url)
 	if err != nil {
 		return err
