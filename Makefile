@@ -4,7 +4,7 @@ PROJECTNAME=$(shell basename "$(PWD)")
 GOCMD=go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
-BINARY_NAME=puplicapi
+BINARY_NAME=publicapi
 BINARY_LINUX=$(BINARY_NAME)_linux
 
 all: help

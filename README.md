@@ -26,5 +26,5 @@ $ make build
 ## Bin
 
 ```sh
-$ ./bin/puplicapi entries --filter cors=no
+$ ./bin/publicapi entries --filter cors=no
 ```
