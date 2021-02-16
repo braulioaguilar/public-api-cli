@@ -8,22 +8,33 @@ import (
 )
 
 // Request struct
-type Request struct {
+type request struct {
 	Client *http.Client
 }
 
+// Options struct
+type Options struct {
+	Timeout time.Duration
+}
+
 // NewClient func
-func NewClient() *Request {
-	return &Request{
-		Client: &http.Client{
+func NewClient(opts *Options) *request {
+	if opts == nil {
+		opts = &Options{
 			Timeout: 3 * time.Second,
+		}
+	}
+
+	return &request{
+		Client: &http.Client{
+			Timeout: opts.Timeout,
 		},
 	}
 }
 
 // GetData func
-func (r Request) GetData(url string, data interface{}) error {
-	resp, err := http.Get(url)
+func (r request) GetData(url string, data interface{}) error {
+	resp, err := r.Client.Get(url)
 	if err != nil {
 		return err
 	}
