@@ -8,13 +8,13 @@ More info about parameters [here](https://api.publicapis.org/).
 
 `entries`, `random`, `categories`
 
-## Usage
+## Test code
 
 ```sh
-$ go run cmd/main.go <endpoint> <filter> 
+$ go run cmd/*.go <endpoint> <filter> 
 
 ## Example
-$ go run cmd/main.go entries --filter cors=yes,https=true
+$ go run cmd/*.go entries --filter cors=yes,https=true
 ```
 
 ## Makefile
