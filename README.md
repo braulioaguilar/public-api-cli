@@ -6,7 +6,9 @@ More info about parameters [here](https://api.publicapis.org/).
 
 ## Endpoints
 
-`entries`, `random`, `categories`
+* `/categories`: List all categories
+* `/entries`: List all entries currently cataloged in the project
+* `/random`: List a single entry selected at random
 
 ## Test code
 
@@ -17,13 +19,13 @@ $ go run cmd/*.go <endpoint> <filter>
 $ go run cmd/*.go entries --filter cors=yes,https=true
 ```
 
-## Makefile
+## Generate binary
 
 ```sh
 $ make build
 ```
 
-## Bin
+## Usage binary
 
 ```sh
 $ ./bin/publicapi entries --filter cors=no
