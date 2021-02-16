@@ -8,6 +8,15 @@ import (
 	"github.com/hokaccha/go-prettyjson"
 )
 
+const (
+	// PathCategories endpoint
+	PathCategories = "categories"
+	// PathEntries endpoint
+	PathEntries = "entries"
+	// PathRandom endpoint
+	PathRandom = "random"
+)
+
 var (
 	entriesSubCommand    *flag.FlagSet
 	randomSubCommand     *flag.FlagSet
@@ -19,15 +28,16 @@ var (
 
 // Filter struct
 type Filter struct {
-	Entry, Random string
+	Entry  string
+	Random string
 }
 
 func main() {
 	// Register main endpoints
 	endpoints = map[string]string{
-		"categories": "/categories",
-		"entries":    "/entries",
-		"random":     "/random",
+		"categories": PathCategories,
+		"entries":    PathEntries,
+		"random":     PathRandom,
 	}
 
 	// Create subcomand
@@ -45,25 +55,25 @@ func main() {
 	}
 
 	// Check first argument as endpoint
-	source := os.Args[1]
-	if _, ok := endpoints[source]; !ok {
+	currentPath := os.Args[1]
+	if _, ok := endpoints[currentPath]; !ok {
 		fmt.Println("Argument not valid")
 		os.Exit(1)
 	}
 
-	switch source {
-	case "categories":
+	switch currentPath {
+	case PathCategories:
 		categoriesSubCommand.Parse(os.Args[2:])
-	case "entries":
+	case PathEntries:
 		entriesSubCommand.Parse(os.Args[2:])
-	case "random":
+	case PathRandom:
 		randomSubCommand.Parse(os.Args[2:])
 	default:
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
 
-	data, err := Run(&Filter{*entryFilter, *randomFilter})
+	data, err := Run(currentPath, &Filter{*entryFilter, *randomFilter})
 	if err != nil {
 		fmt.Printf("Error: %s\n", err.Error())
 		os.Exit(1)

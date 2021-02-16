@@ -24,7 +24,7 @@ func getQuery(filter string) (qs string) {
 }
 
 // Run func
-func Run(f *Filter) (interface{}, error) {
+func Run(path string, f *Filter) (interface{}, error) {
 	var (
 		data  presenter.Entry
 		query string
@@ -37,7 +37,7 @@ func Run(f *Filter) (interface{}, error) {
 
 	if categoriesSubCommand.Parsed() {
 		var list []string
-		if err := httpClient.GetData(fmt.Sprintf("%s/categories", UrlPrefiX), &list); err != nil {
+		if err := httpClient.GetData(fmt.Sprintf("%s/%s", UrlPrefiX, path), &list); err != nil {
 			return nil, err
 		}
 
@@ -49,7 +49,7 @@ func Run(f *Filter) (interface{}, error) {
 			query = getQuery(f.Entry)
 		}
 
-		if err := httpClient.GetData(fmt.Sprintf("%s/entries?%s", UrlPrefiX, query), &data); err != nil {
+		if err := httpClient.GetData(fmt.Sprintf("%s/%s?%s", UrlPrefiX, path, query), &data); err != nil {
 			return nil, err
 		}
 	}
@@ -59,7 +59,7 @@ func Run(f *Filter) (interface{}, error) {
 			query = getQuery(f.Random)
 		}
 
-		if err := httpClient.GetData(fmt.Sprintf("%s/random?%s", UrlPrefiX, query), &data); err != nil {
+		if err := httpClient.GetData(fmt.Sprintf("%s/%s?%s", UrlPrefiX, path, query), &data); err != nil {
 			return nil, err
 		}
 	}
