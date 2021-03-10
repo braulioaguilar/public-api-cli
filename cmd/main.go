@@ -15,6 +15,8 @@ const (
 	PathEntries = "entries"
 	// PathRandom endpoint
 	PathRandom = "random"
+
+	version = "0.0.4"
 )
 
 var (
@@ -80,5 +82,5 @@ func main() {
 	}
 
 	e, _ := prettyjson.Marshal(data)
-	fmt.Printf("%v\n", string(e))
+	fmt.Printf("%s\n", string(e))
 }

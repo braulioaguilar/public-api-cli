@@ -1,6 +1,6 @@
 module github.com/brauliodev29/public-apis
 
-go 1.15
+go 1.16
 
 require (
 	github.com/fatih/color v1.10.0 // indirect
